@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: mypy
+        name: mypy
+        entry: uv run mypy lesson-04-static-typing --strict
+        language: system
+        pass_filenames: false
