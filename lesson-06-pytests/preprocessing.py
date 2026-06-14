@@ -12,13 +12,13 @@ def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
         & (df["passenger_count"] <= 6)
     )
 
-    df.drop(index=df.loc[~mask].index, inplace=True)
+    df_cleaned = df.drop(index=df.loc[~mask].index, inplace=False)
 
     # 2. Создание нового признака 'distance'
-    df["distance"] = np.sqrt(
-        (df["dropoff_longitude"] - df["pickup_longitude"]) ** 2
-        + (df["dropoff_latitude"] - df["pickup_latitude"]) ** 2
+    df_cleaned["distance"] = np.sqrt(
+        (df_cleaned["dropoff_longitude"] - df_cleaned["pickup_longitude"]) ** 2
+        + (df_cleaned["dropoff_latitude"] - df_cleaned["pickup_latitude"]) ** 2
     )
-    final_features = df[["distance", "passenger_count"]]
+    final_features = df_cleaned[["distance", "passenger_count"]]
     return final_features
 
