@@ -1,22 +1,20 @@
-import pandas as pd
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
+from typing import Any
+
+from sklearn.metrics import r2_score
 
 
-def evaluate_model(
-    model: LinearRegression, X: pd.DataFrame, y: pd.Series
-) -> float:
+def evaluate_model(model: Any, X_test: Any, y_test: Any) -> float:
     """
-    Вычисляет RMSE для оценки качества модели.
+    Оценивает качество модели с помощью R^2 метрики.
 
     Args:
         model: Обученная модель.
-        X: Матрица признаков.
-        y: Целевая переменная.
+        X_test: Признаки тестовой выборки.
+        y_test: Целевая переменная тестовой выборки.
 
     Returns:
-        Значение корня из среднеквадратичной ошибки (RMSE).
+        R^2 score.
     """
-    score = model.score(X, y)
-    print(f"Model R^2 score: {score}")
+    predictions = model.predict(X_test)
+    score = r2_score(y_test, predictions)
     return score

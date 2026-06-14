@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-def clean_data(df: pd.DataFrame) -> pd.DataFrame:
+def preprocess_data(df: pd.DataFrame) -> pd.DataFrame:
     """
     Удаляет строки с пропущенными значениями.
 
@@ -9,6 +9,6 @@ def clean_data(df: pd.DataFrame) -> pd.DataFrame:
         df: Исходный DataFrame.
 
     Returns:
-        Очищенный DataFrame без пропусков.
+        Очищенный DataFrame.
     """
     return df.dropna()

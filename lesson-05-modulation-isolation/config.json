@@ -1,8 +1,26 @@
 {
-  "data_path": "data/raw/data.csv",
-  "output_model_path": "models/model.pkl",
+  "data": {
+    "raw_path": "data/raw/data.csv",
+    "processed_dir": "data/processed"
+  },
+  "features": {
+    "selected": [
+      "humidity",
+      "wind_speed",
+      "pressure"
+    ],
+    "engineered": [
+      "wind_humidity_ratio"
+    ]
+  },
   "target": "temperature",
-  "features": ["humidity", "wind_speed", "pressure"],
-  "random_state": 42,
-  "test_size": 0.2
+  "model": {
+    "output_path": "models/model.pkl",
+    "random_state": 42,
+    "test_size": 0.2
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "%(asctime)s - %(filename)s:%(lineno)d - %(levelname)s - %(message)s"
+  }
 }

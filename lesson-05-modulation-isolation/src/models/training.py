@@ -1,28 +1,25 @@
-# src/models/training.py
-from typing import Dict, Optional
+from typing import Any, Tuple
 
-import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 
 
-def train_model(
-    X: pd.DataFrame, y: pd.Series, model_params: Optional[Dict] = None
-) -> LinearRegression:
+def train_model(X, y, random_state: int = 42, test_size: float = 0.2) -> Tuple[Any, Any, Any]:
     """
-    Обучает модель случайного леса на переданных данных.
+    Обучает модель линейной регрессии.
 
     Args:
         X: Матрица признаков.
-        y: Целевая переменная.
-        model_params: Параметры модели, например, random_state, n_estimators.
+        y: Вектор целевой переменной.
+        random_state: Сид для воспроизводимости.
+        test_size: Доля тестовой выборки.
 
     Returns:
-        Обученная модель RandomForestRegressor.
+        Обученная модель, X_test, y_test.
     """
-    if not model_params:
-        model_params = {}
-
-    model = LinearRegression(**model_params)
-    model.fit(X, y)
-    return model
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=test_size, random_state=random_state
+    )
+    model = LinearRegression()
+    model.fit(X_train, y_train)
+    return model, X_test, y_test
